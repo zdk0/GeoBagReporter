@@ -1,4 +1,5 @@
 require('dotenv').config();
+console.log("DEBUG Firebase env length:", process.env.FIREBASE_SERVICE_ACCOUNT_BASE64?.length);
 
 const express = require('express');
 const cors = require('cors');
