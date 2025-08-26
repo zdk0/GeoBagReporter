@@ -5,6 +5,11 @@ const path = require('path');
 let serviceAccount;
 
 if (process.env.FIREBASE_SERVICE_ACCOUNT_BASE64) {
+
+  console.log("DEBUG keys:", Object.keys(process.env).filter(k => k.startsWith("FIREBASE")));
+  console.log("DEBUG FIREBASE_SERVICE_ACCOUNT_BASE64 length:", process.env.FIREBASE_SERVICE_ACCOUNT_BASE64?.length);
+  console.log("DEBUG FIREBASE_SERVICE_ACCOUNT present:", !!process.env.FIREBASE_SERVICE_ACCOUNT);
+
   // Preferred: base64 encoded JSON (safe for env var single-line)
   try {
     const json = Buffer.from(process.env.FIREBASE_SERVICE_ACCOUNT_BASE64, 'base64').toString('utf8');
