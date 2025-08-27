@@ -38,7 +38,7 @@ router.post('/submit', verifyFirebaseToken, async (req, res) => {
       `INSERT INTO reports
        (report_id, user_id, damage_type, severity, description, photo_urls, location)
        VALUES
-       ($1, $2, $3, $4, $5, $6::text[], ST_SetSRID(ST_MakePoint($7, $8), 4326))`,
+       ($1, $2, $3, $4, $5, $6::text[],$7, $8)`,
       [
         report_id,
         user.id,
