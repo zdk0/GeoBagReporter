@@ -19,13 +19,14 @@ async function submitReport(req, res) {
   const report_id = `GEO-${new Date().toISOString().slice(0, 10)}-${uuidv4().slice(0, 8)}`;
 
   try {
-    const result = await pool.query(
+    
+      const result = await pool.query(
       `INSERT INTO reports 
-        (report_id, user_id, damage_type, severity, description, photo_urls, location)
-       VALUES 
-        ($1, $2, $3, $4, $5, $6, ST_SetSRID(ST_MakePoint($7, $8), 4326)::geography)
-       RETURNING *`,
-      [report_id, user_id, damage_type, severity, description, photo_urls, longitude, latitude]
+        (report_id, user_id, damage_type, severity, description, photo_urls, latitude, longitude)
+      VALUES 
+        ($1, $2, $3, $4, $5, $6, $7, $8)
+      RETURNING *`,
+      [report_id, user_id, damage_type, severity, description, photo_urls, latitude, longitude]
     );
 
     res.status(201).json({ report: result.rows[0] });
