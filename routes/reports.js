@@ -36,9 +36,9 @@ router.post('/submit', verifyFirebaseToken, async (req, res) => {
     // 3) insert
     await db.none(
       `INSERT INTO reports
-       (report_id, user_id, damage_type, severity, description, photo_urls, location)
-       VALUES
-       ($1, $2, $3, $4, $5, $6::text[],$7, $8)`,
+      (report_id, user_id, damage_type, severity, description, photo_urls, latitude, longitude)
+      VALUES
+      ($1, $2, $3, $4, $5, $6::text[], $7, $8)`,
       [
         report_id,
         user.id,
@@ -46,8 +46,8 @@ router.post('/submit', verifyFirebaseToken, async (req, res) => {
         severity,
         description,
         photo_urls,
-        location.longitude,
         location.latitude,
+        location.longitude,
       ]
     );
 
